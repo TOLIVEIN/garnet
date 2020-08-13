@@ -15,6 +15,10 @@
         <!-- <home-vue message="Vue 3 + TypeScript App" /> -->
       </aside>
       <main class="col-8">
+        <div class="carousel-container">
+
+        <carousel-vue />
+        </div>
         <div class="row">
           <div class="col">
             <p>最新推出</p>
@@ -43,6 +47,7 @@
 import { defineComponent } from "vue";
 import AsideVue from './components/layout/Aside.vue';
 import GameListVue from './components/layout/GameList.vue';
+import CarouselVue from './components/layout/Carousel.vue';
 // import HomeVue from "./components/Home.vue";
 // import PlayStaionVue from './components/PlayStaion.vue';
 // import XboxVue from './components/Xbox.vue';
@@ -58,6 +63,7 @@ export default defineComponent({
     // SteamVue,
     AsideVue,
     GameListVue,
+    CarouselVue,
   },
 });
 </script>
