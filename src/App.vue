@@ -1,53 +1,28 @@
 <template>
   <!-- <div id="app"> -->
-    <div class="row">
-      <header class="col">
-        <h1>Garnet</h1>
-      </header>
-    </div>
-    <div class="row">
-      <aside class="col-2">
-        <aside-vue/>
-        <!-- <play-staion-vue category="PlayStation" />
-        <xbox-vue category="Xbox"/>
-        <switch-vue category="Switch" />
-        <steam-vue category="Steam" /> -->
-        <!-- <home-vue message="Vue 3 + TypeScript App" /> -->
-      </aside>
-      <main class="col-8">
-        <div class="carousel-container">
-
-        <carousel-vue />
-        </div>
-        <div class="row">
-          <div class="col">
-            <p>最新推出</p>
-            <game-list-vue/>
-          </div>
-          <div class="col">
-            <p>即将推出</p>
-            <game-list-vue/>
-
-          </div>
-          <div class="col">
-            <p>最近流行</p>
-            <game-list-vue/>
-
-          </div>
-        </div>
-      </main>
-    </div>
-    <div class="row">
-      <footer class="col">Footer...</footer>
-    </div>
+  <div class="row">
+    <header class="col">
+      <nav-bar-vue />
+    </header>
+  </div>
+  <div class="row">
+    <aside class="col-2">
+      <aside-vue />
+    </aside>
+    <main class="col-8">
+      <router-view></router-view>
+    </main>
+  </div>
+  <div class="row">
+    <footer class="col">Footer...</footer>
+  </div>
   <!-- </div> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AsideVue from './components/layout/Aside.vue';
-import GameListVue from './components/layout/GameList.vue';
-import CarouselVue from './components/layout/Carousel.vue';
+import AsideVue from "./components/layout/Aside.vue";
+import NavBarVue from "./components/layout/NavBar.vue";
 // import HomeVue from "./components/Home.vue";
 // import PlayStaionVue from './components/PlayStaion.vue';
 // import XboxVue from './components/Xbox.vue';
@@ -62,9 +37,16 @@ export default defineComponent({
     // SwitchVue,
     // SteamVue,
     AsideVue,
-    GameListVue,
-    CarouselVue,
+    NavBarVue,
   },
 });
 </script>
 
+<style lang="scss" scoped>
+aside {
+  // position: fixed;
+  // left: 0;
+  // top: 0;
+  height: 90vh;
+}
+</style>
