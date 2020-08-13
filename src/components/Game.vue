@@ -2,6 +2,7 @@
   <div class="game-container">
     <h3>游戏页面</h3>
     <router-link to="/">Home</router-link>
+    <div>{{games}}</div>
 
     <div class="card-columns">
       <div class="card" v-for="n in 20" :key="n">
@@ -23,23 +24,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { GetGame } from "../api/game";
+import { defineComponent, ref, onMounted } from "vue";
+import { fetchGames } from "../api/game";
 
 export default defineComponent({
   name: "GameVue",
   setup() {
-    const games = ref([]);
-    // const getGames = async () => {
-    //   await GetGame()?.then((res) => {
-    //     games.value = res.data;
-    //     console.log(`games: ${games.value}`);
-    //   });
-    // };
+    const games = ref("");
+    const getGames = () => {
+      fetchGames().then((res) => (games.value = res.data));
+    };
+
+    onMounted(getGames);
 
     return {
       games,
-    //   getGames,
+      getGames,
     };
   },
   data() {
@@ -48,10 +48,12 @@ export default defineComponent({
     };
   },
   mounted() {
-    GetGame()?.then((res) => {
-      this.games = res.data;
-      console.log(`games: ${this.games}`);
-    });
+    // GetGame()?.then((res) => {
+    //   this.games = res.data;
+    //   console.log(`games: ${this.games}`);
+    // });
+    // this.getGames();
+    // console.log(`games: ${this.games}`);
   },
   props: {
     // category: String,
