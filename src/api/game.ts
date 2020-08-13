@@ -7,6 +7,18 @@ const data = "fields id, cover, name, first_release_date;";
 
 export const fetchGames = () => request("post", "games", data);
 
-const coverData = "fields url, where id = ";
-export const fetchCover = (id: string) =>
-    request("post", "cover", `${coverData}${id};`);
+const coverData = "fields url; where id = ";
+export const fetchCovers = (id: string) => {
+    if (!id) {
+        return;
+    }
+    return request("post", "covers", `${coverData}${id};`);
+};
+
+// const imageData = "fields url; where id = ";
+// export const fetchImages = (id: string) => {
+//     if (!id) {
+//         return;
+//     }
+//     return request("post", "covers", `${coverData}${id};`);
+// };

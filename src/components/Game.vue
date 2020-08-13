@@ -8,7 +8,7 @@
       <div class="card" v-for="(game, index) in games" :key="index">
         <!-- <div class="row">
         <div class="col-4">-->
-        <img src="../assets/DarkSouls.jpg" class="card-img-top" alt />
+        <img :src="game.coverUrl" class="card-img-top" alt />
         <!-- </div> -->
         <!-- <div class="col-8"> -->
         <div class="card-body">
@@ -25,20 +25,28 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import { fetchGames, fetchCover } from '../api/game';
+import { fetchGames, fetchCovers } from '../api/game';
 import { dateFormatter } from "../utils/date";
+import { Game } from '../model/Game';
 
 export default defineComponent({
   name: "GameVue",
   setup() {
     const games = ref([]);
     const getGames = () => {
-      fetchGames().then((res) => (games.value = res.data));
-      // .then(() => {
-      //   games.value.forEach((game: any) => {
-      //     fetchCover(game.id).then((res) => (game.cover = res.data));
-      //   });
-      // });
+      fetchGames().then((res) => {games.value = res.data})
+      .then(() => {
+        games.value.forEach((game: Game) => {
+          fetchCovers(game.cover)?.then((res) => {
+            game.coverUrl = `https:${res.data[0].url}`.replace('thumb', 'cover_big')
+            }).catch(() => {
+              game.coverUrl = '../assets/DarkSouls.jpg';
+            }).finally(() => {
+              
+              console.log(`cover url: ${game.coverUrl}`)
+            });
+        });
+      });
     };
 
     // const getCover = () => {
@@ -73,7 +81,7 @@ export default defineComponent({
   },
   methods: {
     dateFormatter,
-    fetchCover,
+    fetchCovers,
   },
 });
 </script>
